@@ -1,0 +1,36 @@
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+A DB AAH
+B DB BBH
+SUMAB DB 00H
+SQTA DW 0000H
+SQTB DW 0000H
+NUM DW 0000H
+QUO DB 0000H
+REM DB 0000H
+DATA ENDS
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA
+        MOV AX,DATA
+        MOV DS,AX
+        MOV AL,A
+        ADD AL,B
+        MOV SUMAB,AL
+        MOV AL,A
+        MUL AL
+        MOV SQTA,AX
+        MOV AL,B
+        MUL AL
+        MOV SQTB,AX
+        MOV AX,SQTA
+        ADD AX,SQTB
+        MOV NUM,AX
+        MOV AX,NUM
+        MOV BL,SUMAB
+        DIV BL
+        MOV QUO,AL
+        MOV REM,AH
+        HLT
+CODE ENDS
+END
