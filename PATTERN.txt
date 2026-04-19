@@ -1,0 +1,74 @@
+PATTERN:
+
+CODE SEGMENT
+ASSUME CS:CODE
+
+START:
+
+; -------- Row 5 :    *  --------
+MOV AH,02H
+MOV BH,00H
+MOV DH,05H      ; Row 5
+MOV DL,12H      ; Column 18 (center)
+INT 10H
+
+MOV AH,0AH
+MOV AL,'*'
+MOV CX,0001H
+INT 10H
+
+
+; -------- Row 6 : ***** --------
+MOV AH,02H
+MOV DH,06H      ; Row 6
+MOV DL,10H      ; Column 16
+INT 10H
+
+MOV AH,0AH
+MOV AL,'*'
+MOV CX,0005H    ; Print 5 stars
+INT 10H
+
+
+; -------- Row 7 :    *  --------
+MOV AH,02H
+MOV DH,07H
+MOV DL,12H
+INT 10H
+
+MOV AH,0AH
+MOV AL,'*'
+MOV CX,0001H
+INT 10H
+
+
+; -------- Row 8 :    *  --------
+MOV AH,02H
+MOV DH,08H
+MOV DL,12H
+INT 10H
+
+MOV AH,0AH
+MOV AL,'*'
+MOV CX,0001H
+INT 10H
+
+
+; -------- Row 9 : ***** --------
+MOV AH,02H
+MOV DH,09H
+MOV DL,10H
+INT 10H
+
+MOV AH,0AH
+MOV AL,'*'
+MOV CX,0005H
+INT 10H
+
+
+; Exit
+MOV AH,4CH
+INT 21H
+
+CODE ENDS
+END
