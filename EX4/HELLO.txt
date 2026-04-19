@@ -1,0 +1,52 @@
+HELLO:
+
+        OUTPUT 2500AD
+.ORG 2000H
+
+DATA SEGMENT
+LIST DB 76H,79H,38H,38H,3FH   ; H E L L O
+COUNT DB 05H
+DATA ENDS
+
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA
+
+START:
+        MOV AX,DATA
+        MOV DS,AX
+
+        ; Initialize 8255 (Mode 0, Port A output)
+        MOV AL,80H
+        MOV DX,FFE6H
+        OUT DX,AL
+
+REPEAT:
+        MOV SI,OFFSET LIST
+        MOV CL,COUNT
+
+L1:
+        MOV AL,[SI]
+        MOV DX,FFE0H
+        OUT DX,AL
+        CALL DELAY
+        INC SI
+        DEC CL
+        JNZ L1
+
+        JMP REPEAT
+
+DELAY:
+        MOV AH,15H
+L3:
+        MOV BX,AAAAH
+L2:
+        DEC BX
+        JNZ L2
+        DEC AH
+        JNZ L3
+        RET
+
+CODE ENDS
+END
+
+
